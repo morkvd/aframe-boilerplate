@@ -7,12 +7,34 @@
     <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
   </head>
   <body>
-    <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+    <a-scene stats>
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9">
+        <a-animation attribute="rotation" begin="click" from="0 45 0" to="0 405 0"></a-animation>
+      </a-box>
+      <a-box position="0 0.5 -5" rotation="0 33 0" color="#EF2D5E">
+          <a-animation attribute="rotation" begin="click" rotation="0 33 0" to="0 0 399"></a-animation>
+      </a-box>
+      <a-box position="1 0.5 -3" rotation="0 0 0" height="1.5" color="#FFC65D">
+        <a-animation attribute="rotation" begin="click" to="360 0 0"></a-animation>
+      </a-box>
+      <a-plane position="0 0 0" rotation="-90 0 0" width="400" height="400" color="#7BC8A4"></a-plane>
       <a-sky color="#ECECEC"></a-sky>
+      <a-camera position="0 1.8 0">
+        <a-cursor color="#2E3A87"></a-cursor>
+      </a-camera>
     </a-scene>
+    <script>
+    AFRAME.registerComponent('scale-on-click', {
+      schema: {
+        to: {default: '2 2 2'}
+      },
+      init: function () {
+        var data = this.data;
+        this.el.addEventListener('click', function () {
+          this.setAttribute('scale', data.to);
+        });
+      }
+    });
+    </script>
   </body>
 </html>
